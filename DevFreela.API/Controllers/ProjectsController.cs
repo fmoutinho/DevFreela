@@ -1,7 +1,6 @@
 ﻿using DevFreela.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Reflection.Metadata.Ecma335;
 
 namespace DevFreela.API.Controllers
 {
