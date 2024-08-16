@@ -8,7 +8,7 @@ namespace DevFreela.API.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
- public ProjectsController(IOptions<FreelanceTotalCostConfig> options)
+        public ProjectsController(IOptions<FreelanceTotalCostConfig> options)
         {
         }
 
