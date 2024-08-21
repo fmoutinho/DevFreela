@@ -1,5 +1,8 @@
-﻿using DevFreela.API.Models;
+﻿using DevFreela.API.Entities;
+using DevFreela.API.Models;
+using DevFreela.API.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.API.Controllers
 {
@@ -7,9 +10,28 @@ namespace DevFreela.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly DevFreelaDbContext _dbContext;
+
+        public UsersController(DevFreelaDbContext context)
+        {
+            _dbContext = context;
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            //var user = _dbContext.Users.Include(u=>u.Skills).ThenInclude SingleOrDefault(u => u.Id == id);
+
+            return Ok(user);
+        }
         [HttpPost]
         public IActionResult Post(CreateUserInputModel model)
         {
+            var user = new User(model.FullName, model.Email, model.BirthDate);
+
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
+
             return Ok();
         }
 
