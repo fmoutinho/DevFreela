@@ -20,7 +20,17 @@ namespace DevFreela.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            //var user = _dbContext.Users.Include(u=>u.Skills).ThenInclude SingleOrDefault(u => u.Id == id);
+            var user = _dbContext.Users
+                            .Include(u => u.Skills)
+                            .ThenInclude(us => us.Skill)
+                            .SingleOrDefault(u => u.Id == id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            var userViewModel = UserViewModel.FromEntity(user);
 
             return Ok(user);
         }
@@ -36,8 +46,12 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpPost("{id}/skills")]
-        public IActionResult PostSkills(UserSkillsInputModel model)
+        public IActionResult PostSkills(int id, UserSkillsInputModel model)
         {
+            var userSkills = model.SkillIds.Select(s => new UserSkill(id, s)).ToList();
+
+            _dbContext.UserSkills.AddRange(userSkills);
+            _dbContext.SaveChanges();
 
             return NoContent();
         }
