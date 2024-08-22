@@ -1,14 +1,11 @@
 using DevFreela.API.Handlers;
-using DevFreela.API.Models;
-using DevFreela.API.Persistence;
+using DevFreela.Application.Models;
+using DevFreela.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<FreelanceTotalCostConfig>(
-    builder.Configuration.GetSection("FreelanceTotalCostConfig"));
-
 var connectionString = builder.Configuration.GetConnectionString("DevFreelaCS");
 builder.Services.AddDbContext<DevFreelaDbContext>(options => options.UseSqlServer(connectionString));
 
