@@ -31,13 +31,7 @@ namespace DevFreela.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var project = _context.Projects
-                    .Include(P => P.Client)
-                    .Include(p => p.Freelancer)
-                    .Include(p => p.Comments)
-                    .SingleOrDefault(x => x.Id == id);
-
-            var model = ProjectViewModel.FromEntity(project);
+            var model = _projectService.GetById(id);
 
             return Ok(model);
         }
