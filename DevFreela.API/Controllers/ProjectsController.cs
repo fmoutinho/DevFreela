@@ -4,6 +4,7 @@ using DevFreela.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using DevFreela.Application.Services;
 
 namespace DevFreela.API.Controllers
 {
@@ -12,23 +13,17 @@ namespace DevFreela.API.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        public ProjectsController(DevFreelaDbContext context)
+        private readonly IProjectService _projectService;
+        public ProjectsController(DevFreelaDbContext context, IProjectService projectService)
         {
             _context = context;
+            _projectService = projectService;
         }
 
         [HttpGet]
-        public IActionResult Get(string search = "", int page = 0 , int size = 3)
+        public IActionResult Get(string search = "")
         {
-            var projects = _context.Projects
-                .Where(p => !p.IsDeleted && (search =="" || p.Title.Contains(search) || p.Description.Contains(search)))
-                .Skip(page * size)
-                .Take(size)
-                .Include(P => P.Client)
-                .Include(p => p.Freelancer)
-                .ToList();
-
-            var model = projects.Select(ProjectItemViewModel.FromEntity).ToList();
+            var model = _projectService.GetAll(search);
 
             return Ok(model);
         }
