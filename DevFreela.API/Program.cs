@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Logging.AddConsole();
 
 builder.Services.AddExceptionHandler<APIExceptionHandler>();
 builder.Services.AddProblemDetails();
