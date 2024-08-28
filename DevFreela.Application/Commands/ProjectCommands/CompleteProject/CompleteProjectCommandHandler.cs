@@ -1,9 +1,6 @@
-﻿using DevFreela.Application.Commands.DeleteProject;
-using DevFreela.Application.Models;
+﻿using DevFreela.Application.Models;
 using DevFreela.Core.Repositories;
-using DevFreela.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
 {
