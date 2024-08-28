@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Queries.GetAllProjects
+namespace DevFreela.Application.Queries.ProjectQueries.GetAllProjects
 {
-    public class GetAllProjectsQuery:IRequest<ResultViewModel<List<ProjectItemViewModel>>>
+    public class GetAllProjectsQuery : IRequest<ResultViewModel<List<ProjectItemViewModel>>>
     {
         public GetAllProjectsQuery()
         {
-            
+
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Queries.GetProjectById
+namespace DevFreela.Application.Queries.ProjectQueries.GetProjectById
 {
     public class GetProjectByIdQuery : IRequest<ResultViewModel<ProjectViewModel>>
     {
