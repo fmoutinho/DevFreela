@@ -45,7 +45,7 @@ namespace DevFreela.Application.Services
                 return ResultViewModel.Failure("Project not found");
             }
 
-            project.SetAsDeleted();
+            project.Delete();
 
             _context.Projects.Update(project);
             _context.SaveChanges();
