@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DevFreela.Infrastructure.Migrations
+namespace DevFreela.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class CreateEntities : Migration

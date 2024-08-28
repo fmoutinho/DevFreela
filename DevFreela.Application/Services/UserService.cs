@@ -39,23 +39,6 @@ namespace DevFreela.Application.Services
             return ResultViewModel<int>.Success(user.Id);
         }
 
-        public ResultViewModel InsertComment(int id, CreateProjectCommentInputModel model)
-        {
-            var project = _context.Projects.SingleOrDefault(p => p.Id == id);
-
-            if (project is null)
-            {
-                return ResultViewModel.Failure("Project not found");
-            }
-
-            var comment = new ProjectComment(model.Content, model.IdProject, model.IdUser);
-
-            _context.ProjectComments.Add(comment);
-            _context.SaveChanges();
-
-            return ResultViewModel.Success();
-        }
-
         public void InsertUserSkills(UserSkillsInputModel model)
         {
             var userSkills = model.SkillIds.Select(s => new UserSkill(model.Id, s)).ToList();

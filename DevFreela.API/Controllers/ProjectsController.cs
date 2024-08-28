@@ -17,11 +17,9 @@ namespace DevFreela.API.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        private readonly IProjectService _service;
         private readonly IMediator _mediator;
-        public ProjectsController(IProjectService service, IMediator mediator)
+        public ProjectsController( IMediator mediator)
         {
-            _service = service;
             _mediator = mediator;
         }
 

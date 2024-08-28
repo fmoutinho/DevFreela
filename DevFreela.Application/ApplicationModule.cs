@@ -4,11 +4,6 @@ using DevFreela.Application.Notifications.ProjectCreated;
 using DevFreela.Application.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application
 {
@@ -25,7 +20,6 @@ namespace DevFreela.Application
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISkillService, SkillService>();
             return services;

@@ -61,6 +61,7 @@ namespace DevFreela.Infrastructure.Persistence
             modelBuilder.Entity<Project>(e =>
             {
                 e.HasKey(p => p.Id);
+                e.Property(e => e.TotalCost).HasColumnType("decimal(18,2)");
 
                 e.HasOne(p => p.Freelancer)
                     .WithMany(f => f.FreelanceProjects)
