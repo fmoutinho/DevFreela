@@ -1,5 +1,7 @@
-﻿using DevFreela.Application.Commands.StartProject;
+﻿using DevFreela.Application.Commands.CompleteProject;
+using DevFreela.Application.Commands.StartProject;
 using DevFreela.Application.Models;
+using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,23 +10,23 @@ namespace DevFreela.Application.Commands.StartProject
 {
     public class StartProjectCommandHandler : IRequestHandler<StartProjectCommand, ResultViewModel>
     {
-        private readonly DevFreelaDbContext _context;
-        public StartProjectCommandHandler(DevFreelaDbContext context)
+        private readonly IProjectRepository _projectRepository;
+        public StartProjectCommandHandler(IProjectRepository projectRepository)
         {
-            _context = context;
+            _projectRepository = projectRepository;
         }
         public async Task<ResultViewModel> Handle(StartProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _context.Projects.SingleOrDefaultAsync(p => p.Id == request.Id);
+            var project = await _projectRepository.GetDetailsById(request.Id);
 
             if (project is null)
             {
                 return ResultViewModel.Failure("Project not found");
             }
-            project.Complete();
 
-            _context.Projects.Update(project);
-            await _context.SaveChangesAsync();
+            project.Start();
+
+            await _projectRepository.Update(project);
 
             return ResultViewModel.Success();
         }
