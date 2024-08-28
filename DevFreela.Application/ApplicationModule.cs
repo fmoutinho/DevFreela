@@ -1,4 +1,4 @@
-﻿using DevFreela.Application.Commands.InsertProject;
+﻿using DevFreela.Application.Commands.ProjectCommands.InsertProject;
 using DevFreela.Application.Models;
 using DevFreela.Application.Notifications.ProjectCreated;
 using DevFreela.Application.Services;

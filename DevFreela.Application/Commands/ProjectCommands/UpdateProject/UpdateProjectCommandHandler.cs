@@ -4,7 +4,7 @@ using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevFreela.Application.Commands.UpdateProject
+namespace DevFreela.Application.Commands.ProjectCommands.UpdateProject
 {
     public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, ResultViewModel>
     {

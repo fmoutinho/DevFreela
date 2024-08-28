@@ -5,7 +5,7 @@ using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevFreela.Application.Commands.CompleteProject
+namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
 {
     public class CompleteProjectCommandHandler : IRequestHandler<CompleteProjectCommand, ResultViewModel>
     {

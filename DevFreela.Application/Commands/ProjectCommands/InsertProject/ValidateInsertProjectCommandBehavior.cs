@@ -8,7 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Commands.InsertProject
+namespace DevFreela.Application.Commands.ProjectCommands.InsertProject
 {
     public class ValidateInsertProjectCommandBehavior : IPipelineBehavior<InsertProjectCommand, ResultViewModel<int>>
     {

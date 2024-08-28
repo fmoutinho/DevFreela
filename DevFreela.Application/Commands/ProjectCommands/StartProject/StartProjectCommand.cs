@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Commands.StartProject
+namespace DevFreela.Application.Commands.ProjectCommands.StartProject
 {
     public class StartProjectCommand : IRequest<ResultViewModel>
     {

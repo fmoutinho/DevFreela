@@ -15,4 +15,8 @@
     <ProjectReference Include="..\DevFreela.Infrastructure\DevFreela.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\UserCommands\" />
+  </ItemGroup>
+
 </Project>

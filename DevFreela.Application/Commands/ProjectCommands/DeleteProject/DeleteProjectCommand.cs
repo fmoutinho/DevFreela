@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevFreela.Application.Commands.DeleteProject
+namespace DevFreela.Application.Commands.ProjectCommands.DeleteProject
 {
     public class DeleteProjectCommand : IRequest<ResultViewModel>
     {

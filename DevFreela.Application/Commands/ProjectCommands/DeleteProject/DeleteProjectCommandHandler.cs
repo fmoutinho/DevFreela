@@ -7,7 +7,7 @@ using DevFreela.Infrastructure.Persistence.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevFreela.Application.Commands.DeleteProject
+namespace DevFreela.Application.Commands.ProjectCommands.DeleteProject
 {
     public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand, ResultViewModel>
     {
