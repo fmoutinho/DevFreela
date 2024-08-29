@@ -1,8 +1,8 @@
-﻿using DevFreela.Core.Entities;
-using DevFreela.Application.Models;
-using DevFreela.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Mvc;
-using DevFreela.Application.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using DevFreela.Application.Queries.SkillQueries.GetAllSkills;
+using DevFreela.Application.Commands.SkillComands.InsertSkill;
+using DevFreela.Application.Queries.SkillQueries.GetSkillById;
 
 namespace DevFreela.API.Controllers
 {
@@ -10,32 +10,32 @@ namespace DevFreela.API.Controllers
     [ApiController]
     public class SkillsController : ControllerBase
     {
-        private readonly ISkillService _skillService;
-        public SkillsController(ISkillService skillService)
+        private readonly IMediator _mediator;
+        public SkillsController(IMediator mediator)
         {
-            _skillService = skillService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var skills = _skillService.GetAll();
+            var skills = _mediator.Send(new GetAllSkillsQuery());
 
             return Ok(skills);
         }
 
         [HttpPost]
-        public IActionResult Post(CreateSkillInputModel model)
+        public async Task<IActionResult> Post(InsertSkillCommand command)
         {
-            var result = _skillService.Insert(model);
+            var result = _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, model);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, command);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _skillService.GetById(id);
+            var result = await _mediator.Send(new GetSkillByIdQuery(id));
 
             if (!result.IsSuccess)
             {

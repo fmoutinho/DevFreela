@@ -1,9 +1,9 @@
-﻿using DevFreela.Core.Entities;
-using DevFreela.Application.Models;
-using DevFreela.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using DevFreela.Application.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using DevFreela.Application.Commands.UserCommands.InsertUser;
+using DevFreela.Application.Queries.UserQueries.GetAllUsers;
+using DevFreela.Application.Queries.UserQueries.GetUserById;
+using DevFreela.Application.Commands.UserCommands.InsertUserSkills;
 
 namespace DevFreela.API.Controllers
 {
@@ -11,17 +11,24 @@ namespace DevFreela.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
-
-        public UsersController(IUserService userService)
+        private readonly IMediator _mediator;
+        public UsersController(IMediator mediator)
         {
-            _userService = userService;
+            _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(int id)
+        {
+            var result = await _mediator.Send(new GetAllUsersQuery());
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _userService.GetById(id);
+            var result = await _mediator.Send(new GetUserByIdQuery(id));
 
             if (!result.IsSuccess)
             {
@@ -31,23 +38,23 @@ namespace DevFreela.API.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult Post(CreateUserInputModel model)
+        public async Task<IActionResult> Post(InsertUserCommand model)
         {
-            var result = _userService.Insert(model);
+            var result = _mediator.Send(model);
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, model);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, model);
         }
 
         [HttpPost("{id}/skills")]
-        public IActionResult PostSkills(UserSkillsInputModel model)
+        public async Task<IActionResult> PostSkills(InsertUserSkillsCommand model)
         {
-            _userService.InsertUserSkills(model);
+            var result = await _mediator.Send(model);
 
             return NoContent();
         }
 
         [HttpPut("{id}/profile-picture")]
-        public IActionResult PostProfilePicture(IFormFile file)
+        public async Task<IActionResult> PostProfilePicture(IFormFile file)
         {
             var description = $"File: {file.FileName}, Size: {file.Length}";
 
