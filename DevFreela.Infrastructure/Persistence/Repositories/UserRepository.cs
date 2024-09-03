@@ -12,7 +12,7 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<int> Add(User user)
+        public async Task<int> AddAsync(User user)
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -20,18 +20,18 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             return user.Id;
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> ExistsAsync(int id)
         {
             return await _context.Projects.AnyAsync(p => p.Id == id);
         }
 
-        public async Task AddSkills(List<UserSkill> userSkills)
+        public async Task AddSkillsAsync(List<UserSkill> userSkills)
         {
             await _context.UserSkills.AddRangeAsync(userSkills);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<User>> GetAllAsync()
         {
             return await _context.Users
                             .Include(u => u.Skills)
@@ -40,17 +40,22 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
                             .ToListAsync();
         }
 
-        public async Task<User?> GetById(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
             return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<User?> GetDetailsById(int id)
+        public async Task<User?> GetDetailsByIdAsync(int id)
         {
             return await _context.Users
                 .Include(u => u.Skills)
                 .ThenInclude(us => us.Skill)
                 .SingleOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<User?> GetDetailsByEmailAndPasswordAsync(string email, string passwordHash0)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Email.Equals(email) && u.Password.Equals(passwordHash0));
         }
     }
 }

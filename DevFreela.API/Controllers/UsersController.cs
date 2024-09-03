@@ -4,6 +4,8 @@ using DevFreela.Application.Commands.UserCommands.InsertUser;
 using DevFreela.Application.Queries.UserQueries.GetAllUsers;
 using DevFreela.Application.Queries.UserQueries.GetUserById;
 using DevFreela.Application.Commands.UserCommands.InsertUserSkills;
+using DevFreela.Application.Models;
+using DevFreela.Application.Commands.UserCommands.LoginUser;
 
 namespace DevFreela.API.Controllers
 {
@@ -38,17 +40,17 @@ namespace DevFreela.API.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Post(InsertUserCommand model)
+        public async Task<IActionResult> Post(InsertUserCommand command)
         {
-            var result = _mediator.Send(model);
+            var result = _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, model);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, command);
         }
 
         [HttpPost("{id}/skills")]
-        public async Task<IActionResult> PostSkills(InsertUserSkillsCommand model)
+        public async Task<IActionResult> PostSkills(InsertUserSkillsCommand command)
         {
-            var result = await _mediator.Send(model);
+            var result = await _mediator.Send(command);
 
             return NoContent();
         }
@@ -61,6 +63,19 @@ namespace DevFreela.API.Controllers
             //Processar a imagem
 
             return Ok(description);
+        }
+
+        [HttpPut("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result.Data);
         }
     }
 }

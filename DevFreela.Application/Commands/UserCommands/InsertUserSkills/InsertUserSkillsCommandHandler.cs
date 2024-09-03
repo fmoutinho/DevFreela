@@ -16,7 +16,7 @@ namespace DevFreela.Application.Commands.UserCommands.InsertUserSkills
         {
             var userSkills = request.SkillIds.Select(s => new UserSkill(request.Id, s)).ToList();
 
-           await  _userRepository.AddSkills(userSkills);
+           await  _userRepository.AddSkillsAsync(userSkills);
 
             return ResultViewModel.Success();
         }

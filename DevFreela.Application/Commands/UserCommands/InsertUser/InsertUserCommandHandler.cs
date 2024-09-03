@@ -3,11 +3,6 @@ using DevFreela.Core.Entities;
 using DevFreela.Core.Repositories;
 using DevFreela.Core.Services;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.UserCommands.InsertUser
 {
@@ -26,7 +21,7 @@ namespace DevFreela.Application.Commands.UserCommands.InsertUser
 
             var user = new User(request.FullName, request.Email, request.BirthDate, passwordHash, request.Role);
 
-            await _userRepository.Add(user);
+            await _userRepository.AddAsync(user);
 
             return ResultViewModel<int>.Success(user.Id);
         }

@@ -9,11 +9,12 @@ namespace DevFreela.Core.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAll();
-        Task<User?> GetById(int id);
-        Task<User?> GetDetailsById(int id);
-        Task<int> Add(User user);
-        Task AddSkills(List<UserSkill> userSkills);
-        Task<bool> Exists(int id);
+        Task<List<User>> GetAllAsync();
+        Task<User?> GetByIdAsync(int id);
+        Task<User?> GetDetailsByIdAsync(int id);
+        Task<int> AddAsync(User user);
+        Task AddSkillsAsync(List<UserSkill> userSkills);
+        Task<bool> ExistsAsync(int id);
+        Task<User?> GetDetailsByEmailAndPasswordAsync(string email, string passwordHash0);
     }
 }
