@@ -13,7 +13,7 @@ namespace DevFreela.Infrastructure.Persistence.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "Password",
                 table: "Users",
-                type: "nvarchar(20)",
+                type: "nvarchar(500)",
                 nullable: false,
                 defaultValue: "");
 

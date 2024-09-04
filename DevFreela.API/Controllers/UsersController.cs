@@ -20,7 +20,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new GetAllUsersQuery());
 
@@ -42,9 +42,9 @@ namespace DevFreela.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(InsertUserCommand command)
         {
-            var result = _mediator.Send(command);
+            var result = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, command);
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
 
         [HttpPost("{id}/skills")]
