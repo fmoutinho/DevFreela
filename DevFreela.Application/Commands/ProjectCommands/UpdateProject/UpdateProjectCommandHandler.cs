@@ -16,7 +16,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.UpdateProject
 
         public async Task<ResultViewModel> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetDetailsById(request.IdProject);
+            var project = await _projectRepository.GetDetailsByIdAsync(request.IdProject);
 
             if (project is null)
             {
@@ -25,7 +25,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.UpdateProject
 
             project.Update(request.Title, request.Description, request.TotalCost);
 
-            await _projectRepository.Update(project);
+            await _projectRepository.UpdateAsync(project);
 
             return ResultViewModel.Success();
         }

@@ -16,7 +16,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.InsertComment
         }
         public async Task<ResultViewModel> Handle(InsertComentCommand request, CancellationToken cancellationToken)
         {
-            var projectExists = await _projectRepository.Exists(request.IdProject);
+            var projectExists = await _projectRepository.ExistsAsync(request.IdProject);
 
             if (!projectExists)
             {
@@ -25,7 +25,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.InsertComment
 
             var comment = new ProjectComment(request.Content, request.IdProject, request.IdUser);
 
-            await _projectRepository.AddComent(comment);
+            await _projectRepository.AddComentAsync(comment);
 
             return ResultViewModel.Success();
         }

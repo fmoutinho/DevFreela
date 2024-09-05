@@ -7,14 +7,14 @@ namespace DevFreela.Application.Models
     {
         public ProjectItemViewModel(int id,
                                 string title,
-                                string clientName,
-                                string freelancerName,
+                                /*string clientName,
+                                string freelancerName,*/
                                 decimal totalCost)
         {
             Id = id;
             Title = title;
-            ClientName = clientName;
-            FreelancerName = freelancerName;
+            //ClientName = clientName;
+            //FreelancerName = freelancerName;
             TotalCost = totalCost;
         }
 
@@ -25,7 +25,7 @@ namespace DevFreela.Application.Models
         public decimal TotalCost { get; private set; }
         public static ProjectItemViewModel FromEntity(Project project)
         {
-            return new(project.Id, project.Title, project.Client.FullName, project.Freelancer.FullName, project.TotalCost);
+            return new(project.Id, project.Title/*, project.Client.FullName, project.Freelancer.FullName*/, project.TotalCost);
         }
     }
 }

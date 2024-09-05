@@ -5,11 +5,17 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.API", "DevFreela.API\DevFreela.API.csproj", "{C168FF68-686B-46EE-A88E-853422F5814F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.Application", "DevFreela.Application\DevFreela.Application.csproj", "{558D4CF9-FC5F-4489-8E03-5F3D8F3A6B5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.Application", "DevFreela.Application\DevFreela.Application.csproj", "{558D4CF9-FC5F-4489-8E03-5F3D8F3A6B5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.Infrastructure", "DevFreela.Infrastructure\DevFreela.Infrastructure.csproj", "{38F98022-EB2E-4B60-A2E4-EA2AB6D9B18A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.Infrastructure", "DevFreela.Infrastructure\DevFreela.Infrastructure.csproj", "{38F98022-EB2E-4B60-A2E4-EA2AB6D9B18A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.Core", "DevFreela.Core\DevFreela.Core.csproj", "{8705CB1E-CD6E-483E-B91C-749BC494386D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.Core", "DevFreela.Core\DevFreela.Core.csproj", "{8705CB1E-CD6E-483E-B91C-749BC494386D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.UnitTests", "DevFreela.UnitTests\DevFreela.UnitTests.csproj", "{8C8C1985-5BAE-47BF-BB7A-59A3D51AC833}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{53785F60-9A78-41CE-84E0-9FFC1D11E992}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D508319C-FAF1-41EB-82E6-8FCA05D1C952}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +39,20 @@ Global
 		{8705CB1E-CD6E-483E-B91C-749BC494386D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8705CB1E-CD6E-483E-B91C-749BC494386D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8705CB1E-CD6E-483E-B91C-749BC494386D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C8C1985-5BAE-47BF-BB7A-59A3D51AC833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C8C1985-5BAE-47BF-BB7A-59A3D51AC833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C8C1985-5BAE-47BF-BB7A-59A3D51AC833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C8C1985-5BAE-47BF-BB7A-59A3D51AC833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C168FF68-686B-46EE-A88E-853422F5814F} = {53785F60-9A78-41CE-84E0-9FFC1D11E992}
+		{558D4CF9-FC5F-4489-8E03-5F3D8F3A6B5C} = {53785F60-9A78-41CE-84E0-9FFC1D11E992}
+		{38F98022-EB2E-4B60-A2E4-EA2AB6D9B18A} = {53785F60-9A78-41CE-84E0-9FFC1D11E992}
+		{8705CB1E-CD6E-483E-B91C-749BC494386D} = {53785F60-9A78-41CE-84E0-9FFC1D11E992}
+		{8C8C1985-5BAE-47BF-BB7A-59A3D51AC833} = {D508319C-FAF1-41EB-82E6-8FCA05D1C952}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76E446C7-4A63-4497-A82E-DBF82E74CC49}

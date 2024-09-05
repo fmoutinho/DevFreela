@@ -12,7 +12,7 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<int> Add(Project project)
+        public async Task<int> AddAsync(Project project)
         {
             await _context.Projects.AddAsync(project);
             await _context.SaveChangesAsync();
@@ -20,18 +20,18 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             return project.Id;
         }
 
-        public async Task AddComent(ProjectComment projectComment)
+        public async Task AddComentAsync(ProjectComment projectComment)
         {
             await _context.ProjectComments.AddAsync(projectComment);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> ExistsAsync(int id)
         {
             return await _context.Projects.AnyAsync(p => p.Id == id);
         }
 
-        public async Task<List<Project>> GetAll()
+        public async Task<List<Project>> GetAllAsync()
         {
             return await _context.Projects
                                     .Include(P => P.Client)
@@ -40,13 +40,13 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
                                     .ToListAsync();
         }
 
-        public async Task<Project?> GetById(int id)
+        public async Task<Project?> GetByIdAsync(int id)
         {
             return await _context.Projects
                     .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Project?> GetDetailsById(int id)
+        public async Task<Project?> GetDetailsByIdAsync(int id)
         {
             return await _context.Projects
                     .Include(P => P.Client)
@@ -55,7 +55,7 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
                     .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task Update(Project project)
+        public async Task UpdateAsync(Project project)
         {
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();

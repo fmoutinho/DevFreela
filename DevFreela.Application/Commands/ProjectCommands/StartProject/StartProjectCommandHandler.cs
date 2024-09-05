@@ -13,7 +13,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.StartProject
         }
         public async Task<ResultViewModel> Handle(StartProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetDetailsById(request.Id);
+            var project = await _projectRepository.GetDetailsByIdAsync(request.Id);
 
             if (project is null)
             {
@@ -22,7 +22,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.StartProject
 
             project.Start();
 
-            await _projectRepository.Update(project);
+            await _projectRepository.UpdateAsync(project);
 
             return ResultViewModel.Success();
         }

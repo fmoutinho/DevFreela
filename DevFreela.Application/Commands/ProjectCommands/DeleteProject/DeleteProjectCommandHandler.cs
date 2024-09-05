@@ -18,7 +18,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.DeleteProject
         }
         public async Task<ResultViewModel> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetDetailsById(request.Id);
+            var project = await _projectRepository.GetDetailsByIdAsync(request.Id);
 
             if (project is null)
             {
@@ -27,7 +27,7 @@ namespace DevFreela.Application.Commands.ProjectCommands.DeleteProject
 
             project.Delete();
 
-            await _projectRepository.Update(project);
+            await _projectRepository.UpdateAsync(project);
 
             return ResultViewModel.Success();
         }
