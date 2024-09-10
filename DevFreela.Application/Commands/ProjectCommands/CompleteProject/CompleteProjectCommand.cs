@@ -10,7 +10,9 @@ namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
             Id = id;
         }
         public int Id { get; set; }
-
-
+        public string CreaditCardNumber { get; set; }
+        public string Cvv {  get; set; }
+        public string ExpiresAt { get; set; }
+        public string FullName {  get; set; }
     }
 }

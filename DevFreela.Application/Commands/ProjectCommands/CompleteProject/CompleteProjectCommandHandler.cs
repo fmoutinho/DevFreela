@@ -1,5 +1,7 @@
 ﻿using DevFreela.Application.Models;
+using DevFreela.Core.DTOs;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
 using MediatR;
 
 namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
@@ -7,9 +9,11 @@ namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
     public class CompleteProjectCommandHandler : IRequestHandler<CompleteProjectCommand, ResultViewModel>
     {
         private readonly IProjectRepository _projectRepository;
-        public CompleteProjectCommandHandler(IProjectRepository projectRepository)
+        private readonly IPaymentService _paymentService;
+        public CompleteProjectCommandHandler(IProjectRepository projectRepository, IPaymentService paymentService)
         {
             _projectRepository = projectRepository;
+            _paymentService = paymentService;
         }
         public async Task<ResultViewModel> Handle(CompleteProjectCommand request, CancellationToken cancellationToken)
         {
@@ -21,6 +25,18 @@ namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
             }
 
             project.Complete();
+
+            var result = await _paymentService.ProcessPayment(new PaymentInfoDTO(request.Id, request.FullName, request.CreaditCardNumber, request.Cvv, request.ExpiresAt));
+
+            if (!result)
+            {
+                project.SetPaymentPending();
+
+                await _projectRepository.UpdateAsync(project);
+
+                return ResultViewModel.Failure("Unable to process payment");
+
+            }
 
             await _projectRepository.UpdateAsync(project);
 
