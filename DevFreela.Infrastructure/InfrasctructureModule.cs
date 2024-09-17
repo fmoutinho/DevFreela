@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using DevFreela.Infrastructure.Payment;
 
 namespace DevFreela.Infrastructure
 {
@@ -36,6 +37,7 @@ namespace DevFreela.Infrastructure
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IAuthService, AuthService>();
 
             return services;
