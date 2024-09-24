@@ -103,9 +103,11 @@ namespace DevFreela.API.Controllers
 
         [HttpPut("{id}/Complete")]
         [Authorize(Roles = "client")]
-        public async Task<IActionResult> Complete(int id)
+        public async Task<IActionResult> Complete([FromRoute]int id, [FromBody] CompleteProjectCommand completeProjectCommand)
         {
-            var result = await _mediator.Send(new CompleteProjectCommand(id));
+            completeProjectCommand.Id = id;
+
+            var result = await _mediator.Send(completeProjectCommand);
 
             if (!result.IsSuccess)
             {
