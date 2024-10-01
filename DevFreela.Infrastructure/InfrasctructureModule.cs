@@ -20,7 +20,8 @@ namespace DevFreela.Infrastructure
             services
                 .AddRepositories()
                 .AddData(configuration)
-                .AddAuthentication(configuration);
+                .AddAuthentication(configuration)
+            .AddMessageBusService();
 
             return services;
         }
@@ -39,6 +40,13 @@ namespace DevFreela.Infrastructure
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IAuthService, AuthService>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddMessageBusService(this IServiceCollection services)
+        {
+            services.AddScoped<IMessageBusService, IMessageBusService>();
 
             return services;
         }
