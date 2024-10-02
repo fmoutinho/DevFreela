@@ -17,14 +17,14 @@ namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
         }
         public async Task<ResultViewModel> Handle(CompleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetDetailsByIdAsync(request.ProjectId);
+            var project = await _projectRepository.GetDetailsByIdAsync(request.Id);
 
             if (project is null)
             {
                 return ResultViewModel.Failure("Project not found");
             }
 
-            _paymentService.ProcessPayment(new PaymentInfoDTO(request.ProjectId, request.FullName, request.CreditCardNumber, request.Cvv, request.ExpiresAt));
+            _paymentService.ProcessPayment(new PaymentRequest(project.Id, request.paymentInfo.CreditCardNumber, request.paymentInfo.Cvv, request.paymentInfo.ExpiresAt, request.paymentInfo.FullName, project.TotalCost));
 
             project.SetPaymentPending();
 

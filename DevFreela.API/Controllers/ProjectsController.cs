@@ -9,6 +9,7 @@ using DevFreela.Application.Commands.ProjectCommands.DeleteProject;
 using DevFreela.Application.Queries.ProjectQueries.GetAllProjects;
 using DevFreela.Application.Queries.ProjectQueries.GetProjectById;
 using Microsoft.AspNetCore.Authorization;
+using DevFreela.Core.DTOs;
 
 namespace DevFreela.API.Controllers
 {
@@ -17,7 +18,7 @@ namespace DevFreela.API.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ProjectsController( IMediator mediator)
+        public ProjectsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -103,9 +104,12 @@ namespace DevFreela.API.Controllers
 
         [HttpPut("{id}/Complete")]
         [Authorize(Roles = "client")]
-        public async Task<IActionResult> Complete([FromRoute]int id, [FromBody] CompleteProjectCommand completeProjectCommand)
+        public async Task<IActionResult> Complete([FromRoute] int id, [FromBody] PaymentInfoDTO paymentInfoDTO)
         {
-            completeProjectCommand.ProjectId = id;
+            var completeProjectCommand = new CompleteProjectCommand(id)
+            {
+                paymentInfo = paymentInfoDTO
+            };
 
             var result = await _mediator.Send(completeProjectCommand);
 

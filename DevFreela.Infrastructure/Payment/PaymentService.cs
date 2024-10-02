@@ -15,9 +15,9 @@ namespace DevFreela.Infrastructure.Payment
         {
             _messageBusService = messageBusService;
         }
-        public void ProcessPayment(PaymentInfoDTO paymentInfoDTO)
+        public void ProcessPayment(PaymentRequest PaymentRequest)
         {
-            var paymentInfoJson = JsonSerializer.Serialize(paymentInfoDTO);
+            var paymentInfoJson = JsonSerializer.Serialize(PaymentRequest);
 
             var paymentInfoBytes = Encoding.UTF8.GetBytes(paymentInfoJson);
 
