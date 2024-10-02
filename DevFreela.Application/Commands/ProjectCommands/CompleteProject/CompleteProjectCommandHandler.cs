@@ -24,19 +24,9 @@ namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
                 return ResultViewModel.Failure("Project not found");
             }
 
-            project.Complete();
+            _paymentService.ProcessPayment(new PaymentInfoDTO(request.Id, request.FullName, request.CreditCardNumber, request.Cvv, request.ExpiresAt));
 
-            var result = await _paymentService.ProcessPayment(new PaymentInfoDTO(request.Id, request.FullName, request.CreaditCardNumber, request.Cvv, request.ExpiresAt));
-
-            if (!result)
-            {
-                project.SetPaymentPending();
-
-                await _projectRepository.UpdateAsync(project);
-
-                return ResultViewModel.Failure("Unable to process payment");
-
-            }
+            project.SetPaymentPending();
 
             await _projectRepository.UpdateAsync(project);
 

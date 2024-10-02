@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DevFreela.Infrastructure.Payment;
+using DevFreela.Infrastructure.MessageBus;
 
 namespace DevFreela.Infrastructure
 {
@@ -46,12 +47,12 @@ namespace DevFreela.Infrastructure
 
         private static IServiceCollection AddMessageBusService(this IServiceCollection services)
         {
-            services.AddScoped<IMessageBusService, IMessageBusService>();
+            services.AddScoped<IMessageBusService, MessageBusService>();
 
             return services;
         }
 
-        public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

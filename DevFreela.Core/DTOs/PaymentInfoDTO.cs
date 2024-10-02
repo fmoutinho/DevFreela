@@ -2,17 +2,17 @@
 {
     public class PaymentInfoDTO
     {
-        public PaymentInfoDTO(int id, string creaditCardNumber, string cvv, string expiresAt, string fullName)
+        public PaymentInfoDTO(int id, string creditCardNumber, string cvv, string expiresAt, string fullName)
         {
-            Id = id;
-            CreaditCardNumber = creaditCardNumber;
+            ProjectId = id;
+            CreditCardNumber = creditCardNumber;
             Cvv = cvv;
             ExpiresAt = expiresAt;
             FullName = fullName;
         }
 
-        public int Id { get; set; }
-        public string CreaditCardNumber { get; set; }
+        public int ProjectId { get; set; }
+        public string CreditCardNumber { get; set; }
         public string Cvv { get; set; }
         public string ExpiresAt { get; set; }
         public string FullName { get; set; }
