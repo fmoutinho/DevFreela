@@ -5,11 +5,11 @@ namespace DevFreela.Application.Commands.ProjectCommands.CompleteProject
 {
     public class CompleteProjectCommand : IRequest<ResultViewModel>
     {
-        public CompleteProjectCommand(int id)
+        public CompleteProjectCommand(int projectId)
         {
-            Id = id;
+            ProjectId = projectId;
         }
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
         public string CreditCardNumber { get; set; }
         public string Cvv {  get; set; }
         public string ExpiresAt { get; set; }

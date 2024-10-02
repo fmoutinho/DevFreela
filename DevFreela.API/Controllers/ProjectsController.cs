@@ -105,7 +105,7 @@ namespace DevFreela.API.Controllers
         [Authorize(Roles = "client")]
         public async Task<IActionResult> Complete([FromRoute]int id, [FromBody] CompleteProjectCommand completeProjectCommand)
         {
-            completeProjectCommand.Id = id;
+            completeProjectCommand.ProjectId = id;
 
             var result = await _mediator.Send(completeProjectCommand);
 
@@ -114,7 +114,7 @@ namespace DevFreela.API.Controllers
                 return BadRequest(result.Message);
             }
 
-            return NoContent();
+            return Accepted();
         }
 
         [HttpPost("{id}/comments")]

@@ -22,7 +22,7 @@ namespace DevFreela.Infrastructure
                 .AddRepositories()
                 .AddData(configuration)
                 .AddAuthentication(configuration)
-            .AddMessageBusService();
+                .AddMessageBusService();
 
             return services;
         }
